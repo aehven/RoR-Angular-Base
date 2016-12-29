@@ -51,7 +51,7 @@ function genreset {
   mysqldump -uaehven -pcypress calories_develop > reset.sql
 }
 
-function dbReset {
+function dbreset {
   JUST_RESET=false
 
   if [[ ! -f $CALORIES_HOME/reset.sql ]]
@@ -245,7 +245,7 @@ function testSetupLocalhost {
   export TEST_URL="http://localhost:3000"
   export TEST_EMAIL="admin0@null.com"
   export TEST_PASSWORD="password12"
-  export TEST_DB_RESET_COMMAND=". setup/calories.sh; go; dbReset"
+  export TEST_DB_RESET_COMMAND=". setup/calories.sh; go; dbreset"
   export BATCH_TOKEN_SECONDS=20
   export TOKEN_LIFETIME_MINUTES=60
   export TEST_EXIT_ON_FAILURE=true
@@ -255,7 +255,7 @@ function testSetupHerokuTest {
   export TEST_URL="https://smartbox-test.herokuapp.com"
   export TEST_EMAIL="admin3@null.com"
   export TEST_PASSWORD="password12"
-  export TEST_DB_RESET_COMMAND=". setup/calories.sh; go; dbReset test"
+  export TEST_DB_RESET_COMMAND=". setup/calories.sh; go; dbreset test"
   export BATCH_TOKEN_SECONDS=20
   export TOKEN_LIFETIME_MINUTES=60
   export TEST_EXIT_ON_FAILURE=true
