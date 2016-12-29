@@ -42,6 +42,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.6)
+    cancancan (1.15.0)
     concurrent-ruby (1.0.4)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -132,6 +133,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  cancancan
   devise
   listen (~> 3.0.5)
   mysql2
