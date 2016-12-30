@@ -1,3 +1,7 @@
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :first_name, :last_name, :email, :role
+end
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
