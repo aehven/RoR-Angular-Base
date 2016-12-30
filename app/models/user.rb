@@ -7,6 +7,4 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :trackable, :validatable#,
           # :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
-
-  has_many :meals
 end
