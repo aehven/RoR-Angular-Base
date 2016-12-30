@@ -2,32 +2,28 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, :all
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    case user.role
+      when "admin"
+        can :manage, :all
+
+      when "manager"
+        can :manage, User
+
+      when "regular"
+        can :read, User, id: user.id
+    end
   end
+
+  #might need to know permissions on client side for things like displaying of Edit buttons.
+  #the server would reject an attempt to update a record, but best to avoid allowing it on
+  #the client first.
+  #as_json thanks to: https://gist.github.com/mewdriller/4980855
+  def as_json
+    abilities = []
+    rules.each do |rule|
+      abilities << { can: rule.base_behavior, actions: rule.actions.as_json, subjects: rule.subjects.map(&:to_s), conditions: rule.conditions.as_json }
+    end
+    abilities
+  end
+
 end
