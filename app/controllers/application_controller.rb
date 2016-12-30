@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
   # < X-Runtime: 0.347458
   # < Transfer-Encoding: chunked                                                                                                                                                         <
   # * Connection #0 to host localhost left intact
-  # {"data":{"id":2,"email":"a@null.com","provider":"email","uid":"a@null.com","name":null,"nickname":null,"image":null,"first_name":"a","last_name":"a","expected_calories":null,"role":null}}
+  # {"data":{"id":2,"email":"a@null.com","provider":"email","uid":"a@null.com","name":null,"nickname":null,"image":null,"first_name":"a","last_name":"a","role":null}}
   #
   # 2. curl -v  -H 'access-token: cqIouK6uB_dy3blktjXELQ' -H 'client: 4lYr4GFJTTajXpBjpVXDnw' -H "uid: a@null.com" -X GET http://localhost:3000/users
   # results in:

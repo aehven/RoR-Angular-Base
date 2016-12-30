@@ -37,36 +37,8 @@ CREATE TABLE `ar_internal_metadata` (
 
 LOCK TABLES `ar_internal_metadata` WRITE;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
-INSERT INTO `ar_internal_metadata` VALUES ('environment','development','2016-12-30 17:15:32','2016-12-30 17:15:32');
+INSERT INTO `ar_internal_metadata` VALUES ('environment','development','2016-12-30 17:38:44','2016-12-30 17:38:44');
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `meals`
---
-
-DROP TABLE IF EXISTS `meals`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `meals` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
-  `calories` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_meals_on_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `meals`
---
-
-LOCK TABLES `meals` WRITE;
-/*!40000 ALTER TABLE `meals` DISABLE KEYS */;
-/*!40000 ALTER TABLE `meals` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -88,7 +60,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20161229222658'),('20161229222659'),('20161229230654'),('20161229230810');
+INSERT INTO `schema_migrations` VALUES ('20161229222659'),('20161229230810');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +97,6 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  `expected_calories` int(11) DEFAULT NULL,
   `role` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_uid_and_provider` (`uid`,`provider`),
@@ -140,7 +111,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'email','u0@null.com','$2a$11$2pmtMR/nS4xNMe5ETRg/IOSbDSqyeas3RIi/Vb/yOFoVhN5aQwahC',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u0@null.com','{}','2016-12-30 17:15:34','2016-12-30 17:15:34','f0','l0',NULL,NULL),(2,'email','u1@null.com','$2a$11$VEW74b/7GXCgc/NIYcy/KO.GiSJZxx6spzjniCN8gXgHO2gLwaadK',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u1@null.com','{}','2016-12-30 17:15:34','2016-12-30 17:15:34','f1','l1',NULL,NULL),(3,'email','u2@null.com','$2a$11$N3OiIt2vqteBaxME9v6zzuI.ksla8EimighzW1.5ZMIsVHKGjMC0G',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u2@null.com','{}','2016-12-30 17:15:34','2016-12-30 17:15:34','f2','l2',NULL,NULL),(4,'email','u3@null.com','$2a$11$z3DAlHy9gUbTc63Ut50Bou7iQpJqWd39tUzeNs8dslwr6g.1sw86m',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u3@null.com','{}','2016-12-30 17:15:34','2016-12-30 17:15:34','f3','l3',NULL,NULL),(5,'email','u4@null.com','$2a$11$qbZkaYRHAjwIBuZzh3kqn.VPOOZirV2T9BTouE2Ck.5KaimyxAA0W',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u4@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f4','l4',NULL,NULL),(6,'email','u5@null.com','$2a$11$wpVIpiNYgkKXpcBWSeHgi.AWI8g8TsYjPRxqfE9iwfHY4J.qq2j0G',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u5@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f5','l5',NULL,NULL),(7,'email','u6@null.com','$2a$11$wSsCkcl1JBVwh/UIyNUl/O.nQrlsTdelKjYa7hwcssmY7URwbkgf6',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u6@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f6','l6',NULL,NULL),(8,'email','u7@null.com','$2a$11$tzZYrL14/NgN3cLMQbatTu1tuKC.GvcNfvSCjPv0XApL8Xo17Lr6G',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u7@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f7','l7',NULL,NULL),(9,'email','u8@null.com','$2a$11$agc8X.mllq0HmFuwracIQu8WB5UlcmXpHmIC9xcdCRkSFK3X9exHq',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u8@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f8','l8',NULL,NULL),(10,'email','u9@null.com','$2a$11$5KtDpx4JODIUiwKdrob3J.gZFM20PM8yqrzH0nOTPehJTVNS5Vi6q',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u9@null.com','{}','2016-12-30 17:15:35','2016-12-30 17:15:35','f9','l9',NULL,NULL);
+INSERT INTO `users` VALUES (1,'email','u0@null.com','$2a$11$mrlmOm/iE4vpHCrdkOQ77OnM7tqnUCIlX/I1/d9y8yTW1evXjUTTS',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u0@null.com','{}','2016-12-30 17:38:46','2016-12-30 17:38:46','f0','l0',NULL),(2,'email','u1@null.com','$2a$11$Ls3YKuH1ldZvztWzNWqUP.qn7DvOL1Uy3ojKrFjiTqXYbog46f3he',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u1@null.com','{}','2016-12-30 17:38:46','2016-12-30 17:38:46','f1','l1',NULL),(3,'email','u2@null.com','$2a$11$1j.bgp58M9oPJnMbt8.seu88CvZZRNMjFLgRx5Emuiymcv1cQYO3K',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u2@null.com','{}','2016-12-30 17:38:46','2016-12-30 17:38:46','f2','l2',NULL),(4,'email','u3@null.com','$2a$11$9oFTrWpKTsNNFIhV52km7eodaban2w./3ppEd3LkS8RE89YgCX9zC',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u3@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f3','l3',NULL),(5,'email','u4@null.com','$2a$11$67v0ad/4TPae7jsDjYAoTe60jQVGxB92yCjTNo4E0gUoFGCL7AnsG',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u4@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f4','l4',NULL),(6,'email','u5@null.com','$2a$11$2dw7zSxoRhbnAjxYNpPCquXxRDC3ME38IK0Sht1OB8ld0LquAVojq',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u5@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f5','l5',NULL),(7,'email','u6@null.com','$2a$11$3Muph28L6p.HjtYCAoLZ4.oj4zXS1hkoheplbJD0h1mTt6acH4lWm',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u6@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f6','l6',NULL),(8,'email','u7@null.com','$2a$11$27pq1Rs1PIfzDebvB7dsReA8nSOom1vs/3itRnP8sbiMeIFruwm6O',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u7@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f7','l7',NULL),(9,'email','u8@null.com','$2a$11$aL9XVXxnqDwS8q5YPVaYn.O4ry/kNCZDOJVr.z.6KccejytNcWC.O',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u8@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f8','l8',NULL),(10,'email','u9@null.com','$2a$11$2l7rMkyphLjGMD50/.CFF.8NzwnIZmoncVLhbQgmp84aYVDkcCe2u',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'u9@null.com','{}','2016-12-30 17:38:47','2016-12-30 17:38:47','f9','l9',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -153,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-30 10:15:35
+-- Dump completed on 2016-12-30 10:40:12
