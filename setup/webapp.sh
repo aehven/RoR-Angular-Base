@@ -181,13 +181,3 @@ function stop {
 }
 
 echo "WEBAPP_HOME = $WEBAPP_HOME"
-
-heroku accounts:set nuset
-
-export SMTP_SERVER_USERNAME=16618858-e9cb-4771-ae51-a5f6f8bf834e
-export SMTP_SERVER_PASSWORD=16618858-e9cb-4771-ae51-a5f6f8bf834e
-export SMTP_SERVER_URL=smtp.postmarkapp.com
-export SMTP_SERVER_DOMAIN=www.binarytrees.biz
-export WEB_CONCURRENCY=1
-
-testSetupLocalhost
