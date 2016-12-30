@@ -4,6 +4,34 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate_user!, unless: :allow_unauthenticated
 
+  def allow_unauthenticated
+    if(controller_name == "sessions" and action_name == "create")
+      true
+    else
+      false
+    end
+  end
+
+  rescue_from Exception do |exception|
+    logger.error "Uncaught Exception: #{exception}"
+    logger.error exception.backtrace.join("\n")
+    session[:exception] = exception
+
+    render json: {exception: exception.to_s.to_json}, status: 500
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: {}, status: 403
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render json: {}, status: 404
+  end
+
+  # rescue_from UnprocessableEntity do |exception|
+  #   render json: exception.errors, status: :unprocessable_entity
+  # end
+
   #####
   # Authentication example
   #
@@ -49,12 +77,4 @@ class ApplicationController < ActionController::API
   # [{"id":2,"first_name":"a","last_name":"a","email":"a@null.com","role":null}]
   #
   #####
-
-  def allow_unauthenticated
-    if(controller_name == "sessions" and action_name == "create")
-      true
-    else
-      false
-    end
-  end
 end
