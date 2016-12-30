@@ -37,7 +37,7 @@ CREATE TABLE `ar_internal_metadata` (
 
 LOCK TABLES `ar_internal_metadata` WRITE;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
-INSERT INTO `ar_internal_metadata` VALUES ('environment','development','2016-12-29 23:23:48','2016-12-29 23:23:48');
+INSERT INTO `ar_internal_metadata` VALUES ('environment','development','2016-12-30 15:40:39','2016-12-30 15:40:39');
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20161229222658'),('20161229230654'),('20161229230810');
+INSERT INTO `schema_migrations` VALUES ('20161229222658'),('20161229222659'),('20161229230654'),('20161229230810');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,8 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL DEFAULT '',
+  `provider` varchar(255) NOT NULL DEFAULT 'email',
+  `uid` varchar(255) NOT NULL DEFAULT '',
   `encrypted_password` varchar(255) NOT NULL DEFAULT '',
   `reset_password_token` varchar(255) DEFAULT NULL,
   `reset_password_sent_at` datetime DEFAULT NULL,
@@ -111,6 +112,15 @@ CREATE TABLE `users` (
   `last_sign_in_at` datetime DEFAULT NULL,
   `current_sign_in_ip` varchar(255) DEFAULT NULL,
   `last_sign_in_ip` varchar(255) DEFAULT NULL,
+  `confirmation_token` varchar(255) DEFAULT NULL,
+  `confirmed_at` datetime DEFAULT NULL,
+  `confirmation_sent_at` datetime DEFAULT NULL,
+  `unconfirmed_email` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `tokens` text,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
@@ -118,8 +128,9 @@ CREATE TABLE `users` (
   `expected_calories` int(11) DEFAULT NULL,
   `role` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_users_on_email` (`email`),
-  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
+  UNIQUE KEY `index_users_on_uid_and_provider` (`uid`,`provider`),
+  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`),
+  KEY `index_users_on_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -141,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-29 16:23:50
+-- Dump completed on 2016-12-30  8:40:41

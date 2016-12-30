@@ -29,6 +29,8 @@ gem 'puma', '~> 3.0'
 gem 'devise'
 gem 'cancancan'
 gem 'active_model_serializers'
+gem 'omniauth'
+gem 'devise_token_auth'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
