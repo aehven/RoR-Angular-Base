@@ -3,7 +3,7 @@ require 'rest-client'
 require 'colorize'
 
 $base_url = "localhost:3000"
-$email = "a0@null.com"
+$email = "m0@null.com"
 $password = "password"
 $uid = $email
 $rcount = 0
@@ -60,9 +60,9 @@ request(:post, "users",
         { user: {
             first_name: "api",
             last_name: "user",
-            email: "apiuser@null.com",
+            email: "apiuser2@null.com",
             password: "password",
-            role: "regular"
+            role: "admin"
           }
         }
        )

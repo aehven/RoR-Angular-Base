@@ -7,8 +7,11 @@ class Ability
         can :manage, :all
 
       when "manager"
-        can :manage, User
-
+        can [:read, :update], User
+        can [:create], User do |user|
+          user.role = "regular"
+        end
+        
       when "regular"
         can [:read, :update], User, id: user.id
     end
