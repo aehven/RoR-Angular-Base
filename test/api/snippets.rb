@@ -28,16 +28,18 @@ def request(type, path, payload=nil)
     access_token: $token
   }
 
-  puts "[#{type}] [#{headers}] [#{path}] [#{payload}]".green
+  url = "#{$base_url}/#{path}"
+
+  puts "[#{type}] [#{path}] [#{payload}] ([#{headers}])".green
   puts
 
   case type
-    when :post
-      RestClient.post("#{$base_url}/#{path}", payload, headers) do |response, request, result|
+    when :post, :put
+      RestClient.send(type, url, payload, headers) do |response, request, result|
         parse_reponse(response)
       end
     when :get
-      RestClient.get("#{$base_url}/#{path}", headers) do |response, request, result|
+      RestClient.get(url, headers) do |response, request, result|
         parse_reponse(response)
     end
   end
@@ -46,3 +48,7 @@ end
 request(:post, "auth/sign_in", {"email": $email, "password": $password})
 
 request(:get, "users")
+
+request(:get, "users/1")
+
+request(:put, "users/1", {user: {first_name: "blah"}})
