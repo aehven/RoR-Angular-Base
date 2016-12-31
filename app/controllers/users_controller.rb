@@ -13,18 +13,30 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       render json: @user
     else
-      render json: @user.errors, status: 422
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def create
-    render json: @user
+    if @user.save
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name)
+    case action_name
+    when "update"
+      params.require(:user).permit(:email, :password, :first_name, :last_name)
+    when "create"
+      params.require(:user).require(:email)
+      params.require(:user).require(:password)
+      params.require(:user).require(:role)
+      params.require(:user).permit(:email, :password, :first_name, :last_name, :role)
+    end
   end
 
 end

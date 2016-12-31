@@ -3,7 +3,7 @@ require 'rest-client'
 require 'colorize'
 
 $base_url = "localhost:3000"
-$email = "r0@null.com"
+$email = "a0@null.com"
 $password = "password"
 $uid = $email
 $rcount = 0
@@ -50,8 +50,19 @@ end
 
 request(:post, "auth/sign_in", {"email": $email, "password": $password})
 
-request(:get, "users")
+# request(:get, "users")
+#
+# request(:get, "users/1")
+#
+# request(:put, "users/1", {user: {first_name: "blah"}})
 
-request(:get, "users/1")
-
-request(:put, "users/1", {user: {first_name: "blah"}})
+request(:post, "users",
+        { user: {
+            first_name: "api",
+            last_name: "user",
+            email: "apiuser@null.com",
+            password: "password",
+            role: "regular"
+          }
+        }
+       )

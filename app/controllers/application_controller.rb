@@ -21,7 +21,7 @@ class ApplicationController < ActionController::API
   end
 
   rescue_from ActionController::ParameterMissing do |exception|
-    render json: {exception: exception.to_s.to_json}, status: 422
+    render json: {exception: exception.to_s.to_json}, status: :unprocessable_entity
   end
 
   rescue_from CanCan::AccessDenied do |exception|
