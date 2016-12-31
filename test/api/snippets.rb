@@ -3,9 +3,10 @@ require 'rest-client'
 require 'colorize'
 
 $base_url = "localhost:3000"
-$email = "a0@null.com"
+$email = "r0@null.com"
 $password = "password"
 $uid = $email
+$rcount = 0
 
 def parse_reponse(response)
   $response = response
@@ -14,14 +15,16 @@ def parse_reponse(response)
   $client = $headers[:client]
   $data = JSON.parse!($response.body)
 
-  puts "response: #{$response.inspect}".cyan
-  puts "headers: #{$headers.inspect}".cyan
+  puts "#{$rcount}) response: #{$response.inspect}".cyan
+  puts "#{$rcount}) headers: #{$headers.inspect}".cyan
   puts
-  puts "data: #{$data}".blue
+  puts "#{$rcount}) data: #{$data}".blue
   puts
 end
 
 def request(type, path, payload=nil)
+  $rcount += 1
+
   headers = {
     uid: $uid,
     client: $client,
@@ -30,7 +33,7 @@ def request(type, path, payload=nil)
 
   url = "#{$base_url}/#{path}"
 
-  puts "[#{type}] [#{path}] [#{payload}] ([#{headers}])".green
+  puts "#{$rcount}) [#{type}] [#{path}] [#{payload}] ([#{headers}])".green
   puts
 
   case type
