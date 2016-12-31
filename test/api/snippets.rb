@@ -60,9 +60,9 @@ request(:post, "users",
         { user: {
             first_name: "api",
             last_name: "user",
-            email: "apiuser2@null.com",
+            email: "apiuser4@null.com",
             password: "password",
-            role: "admin"
+            role: "regular"
           }
         }
        )
