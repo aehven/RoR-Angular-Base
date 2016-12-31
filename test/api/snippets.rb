@@ -14,16 +14,35 @@ def parse_reponse(response)
   $client = $headers[:client]
   $data = JSON.parse!($response.body)
 
-  puts "response: #{$response.inspect}".green
-  puts "headers: #{$headers.inspect}".green
+  puts "response: #{$response.inspect}".cyan
+  puts "headers: #{$headers.inspect}".cyan
+  puts
   puts "data: #{$data}".blue
+  puts
 end
 
-def send_request(type, path, payload)
-  puts "#{type}: #{$request_path} / #{$request_payload}".cyan
-  RestClient.send(type, "#{$base_url}/#{path}", payload) do |response, request, result|
-    parse_reponse(response)
+def request(type, path, payload=nil)
+  headers = {
+    uid: $uid,
+    client: $client,
+    access_token: $token
+  }
+
+  puts "[#{type}] [#{headers}] [#{path}] [#{payload}]".green
+  puts
+
+  case type
+    when :post
+      RestClient.post("#{$base_url}/#{path}", payload, headers) do |response, request, result|
+        parse_reponse(response)
+      end
+    when :get
+      RestClient.get("#{$base_url}/#{path}", headers) do |response, request, result|
+        parse_reponse(response)
+    end
   end
 end
 
-send_request(:post, "auth/sign_in", {"email": $email, "password": $password})
+request(:post, "auth/sign_in", {"email": $email, "password": $password})
+
+request(:get, "users")
