@@ -17,7 +17,11 @@ class ApplicationController < ActionController::API
     logger.error exception.backtrace.join("\n")
     session[:exception] = exception
 
-    render json: {exception: exception.to_s.to_json}, status: 500
+    render json: {class: exception.class.name, exception: exception.to_s.to_json}, status: 500
+  end
+
+  rescue_from ActionController::ParameterMissing do |exception|
+    render json: {exception: exception.to_s.to_json}, status: 422
   end
 
   rescue_from CanCan::AccessDenied do |exception|
