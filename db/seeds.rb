@@ -7,22 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 10.times do |i|
   User.create(email: "r#{i}@null.com",
-              first_name: "f#{i}",
-              last_name: "l#{i}",
+              first_name: "rf#{i}",
+              last_name: "rl#{i}",
               password: "password",
               role: "regular"
               )
 
   User.create(email: "m#{i}@null.com",
-              first_name: "f#{i}",
-              last_name: "l#{i}",
+              first_name: "mf#{i}",
+              last_name: "ml#{i}",
               password: "password",
               role: "manager"
               )
 
   User.create(email: "a#{i}@null.com",
-              first_name: "f#{i}",
-              last_name: "l#{i}",
+              first_name: "af#{i}",
+              last_name: "al#{i}",
               password: "password",
               role: "admin"
               )
