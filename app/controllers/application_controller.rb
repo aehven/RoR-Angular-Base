@@ -17,19 +17,23 @@ class ApplicationController < ActionController::API
     logger.error exception.backtrace.join("\n")
     session[:exception] = exception
 
-    render json: {class: exception.class.name, exception: exception.to_s.to_json}, status: 500
+    render json: {exception_class: exception.class.name, exception: exception.to_s}, status: :internal_server_error
   end
 
   rescue_from ActionController::ParameterMissing do |exception|
-    render json: {exception: exception.to_s.to_json}, status: :unprocessable_entity
+    render json: {exception: exception.to_s}, status: :unprocessable_entity
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render json: {}, status: 403
+    render json: {}, status: :forbidden
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    render json: {}, status: 404
+    render json: {}, status: :not_found
+  end
+
+  rescue_from SyntaxError do |exception|
+    render json: {}, status: 523
   end
 
   # rescue_from UnprocessableEntity do |exception|
