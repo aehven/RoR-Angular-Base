@@ -10,7 +10,7 @@ class Ability
         can :manage, User
 
       when "regular"
-        can :update, User, id: user.id
+        can [:read, :update], User, id: user.id
     end
   end
 
