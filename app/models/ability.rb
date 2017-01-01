@@ -8,7 +8,7 @@ class Ability
 
       when "manager"
         can [:read, :update, :create], User
-        
+
       when "regular"
         can [:read, :update], User, id: user.id
     end

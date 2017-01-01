@@ -3,9 +3,9 @@ require 'rest-client'
 require 'colorize'
 
 $base_url = "localhost:3000"
-$email = "m0@null.com"
-$password = "password"
-$uid = $email
+$email = nil
+$password = nil
+$uid = nil
 $rcount = 0
 
 def parse_reponse(response)
@@ -48,19 +48,31 @@ def request(type, path, payload=nil)
   end
 end
 
-request(:post, "auth/sign_in", {"email": $email, "password": $password})
+def sign_in(email, password)
+  $email = email
+  $password = password
+  $uid = $email
+  request(:post, "auth/sign_in", {"email": $email, "password": $password})
+end
 
-# request(:get, "users")
-#
-# request(:get, "users/1")
-#
-# request(:put, "users/1", {user: {first_name: "blah"}})
+sign_in("r0@null.com", "password")
+request(:get, "users")
+
+sign_in("m0@null.com", "password")
+request(:get, "users")
+
+sign_in("a0@null.com", "password")
+request(:get, "users")
+
+request(:get, "users/1")
+
+request(:put, "users/1", {user: {first_name: "blah"}})
 
 request(:post, "users",
         { user: {
             first_name: "api",
             last_name: "user",
-            email: "apiuser4@null.com",
+            email: "apiuser6@null.com",
             password: "password",
             role: "regular"
           }
