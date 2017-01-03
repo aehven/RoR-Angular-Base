@@ -41,8 +41,8 @@ def request(type, path, payload=nil)
       RestClient.send(type, url, payload, headers) do |response, request, result|
         parse_reponse(response)
       end
-    when :get
-      RestClient.get(url, headers) do |response, request, result|
+    when :get, :delete
+      RestClient.send(type, url, headers) do |response, request, result|
         parse_reponse(response)
     end
   end
@@ -55,11 +55,17 @@ def sign_in(email, password)
   request(:post, "auth/sign_in", {"email": $email, "password": $password})
 end
 
+def sign_out
+  request(:delete, "auth/sign_out")
+end
+
 sign_in("r0@null.com", "password")
 request(:get, "users")
+sign_out
 
 sign_in("m0@null.com", "password")
 request(:get, "users")
+sign_out
 
 sign_in("a0@null.com", "password")
 request(:get, "users")
@@ -78,3 +84,5 @@ request(:post, "users",
           }
         }
        )
+
+sign_out
