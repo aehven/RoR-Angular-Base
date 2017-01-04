@@ -34,6 +34,6 @@ class ApplicationController < ActionController::API
   end
 
   def log_headers
-    logger.debug("#{request.headers['access_token']} from #{request.headers['client']}")
+    logger.debug("Token #{request.headers['Access-Token']} from client #{request.headers['client']}")
   end
 end
