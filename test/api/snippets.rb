@@ -11,7 +11,7 @@ $rcount = 0
 def parse_reponse(response)
   $response = response
   $headers = $response.headers
-  $token = $headers[:access_token]
+  $access_token = $headers[:access_token]
   $client = $headers[:client]
   $data = JSON.parse!($response.body)
 
@@ -28,7 +28,7 @@ def request(type, path, payload=nil)
   headers = {
     uid: $uid,
     client: $client,
-    access_token: $token
+    access_token: $access_token
   }
 
   url = "#{$base_url}/#{path}"

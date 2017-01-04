@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include CanCan::ControllerAdditions
 
+  before_action :log_headers
   before_action :authenticate_user!, unless: :allow_unauthenticated
 
   def allow_unauthenticated
@@ -30,5 +31,9 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render json: {}, status: :not_found
+  end
+
+  def log_headers
+    logger.debug("#{request.headers['access_token']} from #{request.headers['client']}")
   end
 end
