@@ -2,8 +2,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    if !params[:search].blank?
+      @users = @users.search(params[:search])
+    end
+
+    @count = @users.count
     @users = @users.paginate(per_page: params[:per_page], page: params[:page])
-    render json: @users.all
+    render json: {users: @users, count: @count}
   end
 
   def show

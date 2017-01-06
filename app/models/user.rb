@@ -14,4 +14,8 @@ class User < ApplicationRecord
     admin: 1000
   }
 
+  scope :search, -> term {
+    where("first_name like ? or last_name like ? or email like ?",
+    "%#{term}%", "%#{term}%", "%#{term}%")
+  }
 end
