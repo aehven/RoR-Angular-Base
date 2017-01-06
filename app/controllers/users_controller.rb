@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @users = @users.paginate(per_page: params[:per_page], page: params[:page])
     render json: @users.all
   end
 
