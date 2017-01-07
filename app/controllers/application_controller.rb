@@ -6,7 +6,10 @@ class ApplicationController < ActionController::API
   before_action :authenticate_user!, unless: :allow_unauthenticated
 
   def allow_unauthenticated
-    if(controller_name == "sessions" and action_name == "create")
+    if(
+        (controller_name == "sessions" and action_name == "create") ||
+        (controller_name == "registrations" and action_name == "create")
+      )
       true
     else
       false
