@@ -14,6 +14,8 @@ class User < ApplicationRecord
     admin: 1000
   }
 
+  has_many :meals
+  
   scope :search, -> term {
     where("first_name like ? or last_name like ? or email like ?",
     "%#{term}%", "%#{term}%", "%#{term}%")

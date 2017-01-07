@@ -12,6 +12,10 @@ class Ability
       when "regular"
         can [:read, :update], User, id: user.id
     end
+
+    can :manage, Meal do |meal|
+      meal.new_record? or meal.user_id == user.id
+    end
   end
 
   #might need to know permissions on client side for things like displaying of Edit buttons.
