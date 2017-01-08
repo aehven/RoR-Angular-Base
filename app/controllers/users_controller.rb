@@ -53,12 +53,15 @@ class UsersController < ApplicationController
 
     case action_name
       when "update"
-        params.require(:user).permit(:email, :password, :first_name, :last_name)
+        if params[:user][:password].blank?
+          params[:user].delete("password")
+        end
+        params.require(:user).permit(:email, :password, :first_name, :last_name, :expected_calories)
       when "create"
         params.require(:user).require(:email)
         params.require(:user).require(:password)
         params.require(:user).require(:role)
-        params.require(:user).permit(:email, :password, :first_name, :last_name, :role)
+        params.require(:user).permit(:email, :password, :first_name, :last_name, :role, :expected_calories)
     end
   end
 

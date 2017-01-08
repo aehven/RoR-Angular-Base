@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :role
+  attributes :id, :first_name, :last_name, :email, :role, :expected_calories
 end
 
 class User < ApplicationRecord
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   }
 
   has_many :meals
-  
+
   scope :search, -> term {
     where("first_name like ? or last_name like ? or email like ?",
     "%#{term}%", "%#{term}%", "%#{term}%")
