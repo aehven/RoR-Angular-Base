@@ -1,7 +1,13 @@
 class MealsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index]
 
   def index
+    if params[:user_id].blank?
+      @meals = current_user.meals
+    else
+      @meals = User.find(params[:user_id]).meals
+    end
+
     if !params[:search].blank?
       @meals = @meals.search(params[:search])
     end

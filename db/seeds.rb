@@ -27,3 +27,9 @@
               role: "admin"
               )
 end
+
+User.all.each do |user|
+  10.times do |i|
+    Meal.create(user_id: user.id, description: "Meal #{i} for user #{user.email}", calories: 100+i, dt: Time.now)
+  end
+end
