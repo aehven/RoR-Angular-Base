@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 20170107170702) do
     t.string   "description"
     t.integer  "calories"
     t.integer  "user_id"
-    t.datetime "dt"
+    t.date     "date"
+    t.time     "time"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_meals_on_user_id", using: :btree

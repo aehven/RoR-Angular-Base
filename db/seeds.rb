@@ -30,6 +30,10 @@ end
 
 User.all.each do |user|
   15.times do |i|
-    Meal.create(user_id: user.id, description: "Meal #{i} for user #{user.email}", calories: 100+i, dt: Time.now)
+    Meal.create(user_id: user.id,
+                description: "Meal #{i} for user #{user.email}",
+                calories: 100+i,
+                date: Date.today-i.days,
+                time: Time.now-i.hours)
   end
 end
