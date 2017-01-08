@@ -37,6 +37,14 @@ class MealsController < ApplicationController
     end
   end
 
+  def destroy
+    if @meal.destroy
+      render json: {}
+    else
+      render json: @meal.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def meal_params
