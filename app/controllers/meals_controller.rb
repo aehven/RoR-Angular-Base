@@ -8,13 +8,15 @@ class MealsController < ApplicationController
       @meals = User.find(params[:user_id]).meals
     end
 
+    @calories_today = @meals.today.sum(:calories)
+
     if !params[:search].blank?
       @meals = @meals.search(params[:search])
     end
 
     @count = @meals.count
     @meals = @meals.paginate(per_page: params[:per_page], page: params[:page])
-    render json: {meals: @meals, count: @count}
+    render json: {meals: @meals, count: @count, calories_today: @calories_today}
   end
 
   def show
