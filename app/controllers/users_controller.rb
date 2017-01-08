@@ -53,6 +53,9 @@ class UsersController < ApplicationController
 
     case action_name
       when "update"
+        if params[:user][:password].blank?
+          params[:user].delete("password")
+        end
         params.require(:user).permit(:email, :password, :first_name, :last_name)
       when "create"
         params.require(:user).require(:email)
