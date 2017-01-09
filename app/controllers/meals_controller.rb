@@ -14,6 +14,8 @@ class MealsController < ApplicationController
       @meals = @meals.search(params[:search])
     end
 
+    @meals = @meals.filter(params)
+
     @count = @meals.count
     @meals = @meals.paginate(per_page: params[:per_page], page: params[:page])
     render json: {meals: @meals, count: @count, calories_today: @calories_today}
