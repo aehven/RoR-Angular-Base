@@ -8,19 +8,19 @@ class Meal < ApplicationRecord
   def self.filter(params)
     filter = Meal.all
 
-    if params[:from_date]
+    if !params[:from_date].blank?
       filter = filter.where("date >= ?", params[:from_date])
     end
 
-    if params[:to_date]
+    if !params[:to_date].blank?
       filter = filter.where("date <= ?", params[:to_date])
     end
 
-    if params[:from_time]
+    if !params[:from_time].blank?
       filter = filter.where("time >= ?", params[:from_time])
     end
 
-    if params[:to_time]
+    if !params[:to_time].blank?
       filter = filter.where("time <= ?", params[:to_time])
     end
 
