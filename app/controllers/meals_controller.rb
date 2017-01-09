@@ -25,7 +25,9 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update_attributes(meal_params)
-      render json: @meal
+      @meals = Meal.where(user_id: @meal.user_id)
+      @calories_today = @meals.today.sum(:calories)
+      render json: {meal: @meal, calories_today: @calories_today}
     else
       render json: @meal.errors, status: :unprocessable_entity
     end
