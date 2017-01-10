@@ -10,21 +10,24 @@
               first_name: "rf#{i}",
               last_name: "rl#{i}",
               password: "password",
-              role: "regular"
+              role: "regular",
+              expected_calories: 2500 + i
               )
 
   User.create(email: "m#{i}@null.com",
               first_name: "mf#{i}",
               last_name: "ml#{i}",
               password: "password",
-              role: "manager"
+              role: "manager",
+              expected_calories: 2500 + i
               )
 
   User.create(email: "a#{i}@null.com",
               first_name: "af#{i}",
               last_name: "al#{i}",
               password: "password",
-              role: "admin"
+              role: "admin",
+              expected_calories: 2500 + i
               )
 end
 
