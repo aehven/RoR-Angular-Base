@@ -4,8 +4,12 @@ function resource {
   source $WEBAPP_HOME/setup/webapp.sh
 }
 
-function go {
+function gow {
   cd $WEBAPP_HOME
+}
+
+function goc {
+  cd $CLIENT_HOME
 }
 
 function cls {
@@ -157,17 +161,16 @@ function codeCheck {
 function tmuxinit {
   tmux start-server
   tmux new-session -d -s webapp
-  tmux new-window -t webapp:1 -n sql
-  tmux new-window -t webapp:2 -n console
-  tmux new-window -t webapp:3 -n server
-  tmux new-window -t webapp:4 -n shell
+  tmux new-window -t webapp:1 -n prod-rails
+  tmux new-window -t webapp:2 -n prod-ng
 
-  tmux send-keys -t webapp:1 "source $WEBAPP_HOME/setup/webapp.sh; mysql -uaehven -pcypress webapp_develop" C-m
-  tmux send-keys -t webapp:2 "source $WEBAPP_HOME/setup/webapp.sh; go; rails c" C-m
-  tmux send-keys -t webapp:3 "source $WEBAPP_HOME/setup/webapp.sh; go; rails s -b0.0.0.0" C-m
-  tmux send-keys -t webapp:4 "source $WEBAPP_HOME/setup/webapp.sh; go" C-m
+  tmux send-keys -t webapp:1 "web; webp; gow; rails s -b0.0.0.0" C-m
+  tmux send-keys -t webapp:2 "web; webp; goc; ng serve --host 0.0.0.0" C-m
+  # tmux send-keys -t webapp:2 "source $WEBAPP_HOME/setup/webapp.sh; go; rails c" C-m
+  # tmux send-keys -t webapp:3 "source $WEBAPP_HOME/setup/webapp.sh; go; rails s -b0.0.0.0" C-m
+  # tmux send-keys -t webapp:4 "source $WEBAPP_HOME/setup/webapp.sh; go" C-m
 
-  tmux select-window -t webapp:3
+  # tmux select-window -t webapp:3
   tmux attach-session -t webapp
 }
 
