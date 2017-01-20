@@ -32,6 +32,8 @@ gem 'active_model_serializers'
 gem 'omniauth'
 gem 'devise_token_auth'
 gem 'will_paginate'
+# this isn't necessary if open maps in new tab with address query
+# gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
