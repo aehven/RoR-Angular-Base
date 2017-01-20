@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :role, :address, :latitude, :longitude
+  attributes :id, :first_name, :last_name, :email, :role, :address, :phone#, :latitude, :longitude
 end
 
 class User < ApplicationRecord

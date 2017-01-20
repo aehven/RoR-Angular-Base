@@ -56,12 +56,12 @@ class UsersController < ApplicationController
         if params[:user][:password].blank?
           params[:user].delete("password")
         end
-        params.require(:user).permit(:email, :password, :first_name, :last_name, :address)
+        params.require(:user).permit(:email, :password, :first_name, :last_name, :address, :phone)
       when "create"
         params.require(:user).require(:email)
         params.require(:user).require(:password)
         params.require(:user).require(:role)
-        params.require(:user).permit(:email, :password, :first_name, :last_name, :role, :address)
+        params.require(:user).permit(:email, :password, :first_name, :last_name, :role, :address, :phone)
     end
   end
 
