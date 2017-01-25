@@ -178,7 +178,7 @@ function deploy {
   git init .
   git add .
   git commit -am "deploy"
-  git remote add git@heroku.com:ror-ng-starter.git
+  git remote add heroku git@heroku.com:ror-ng-starter.git
   git push -f heroku master
   heroku logs --tail -aror-ng-starter
 }
