@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ "$SKIP_PREPARE_COMMIT_MSG" == "true" ]]; then
+  exit 0
+fi
+
 shopt -s nocasematch
 BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`
 
@@ -11,7 +15,6 @@ else
 fi
 
 if [[ "$ISSUE_NUMBER" != "" ]]; then
-  ISSUE_NAME=`echo "#$ISSUE_NUMBER: "`
+  ISSUE_NAME=`echo "aehven/RoR-Angular-Base#$ISSUE_NUMBER: "`
   sed -i "1s@^@${ISSUE_NAME}@" "$1"
 fi
-
