@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
 
   def allow_unauthenticated
     if(
+        (action_name == "letsencrypt" && controller_name == "pages") ||
         (controller_name == "sessions" and action_name == "create") ||
         (controller_name == "registrations" and action_name == "create")
       )
