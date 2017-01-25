@@ -195,12 +195,12 @@ function tmuxinit {
   tmux new-window -t webapp:6 -n ng-bash
 
 
-  tmux send-keys -t webapp:1 "webd; gow; mysql -uaehven -pcypress --database webapp_develop" C-m
-  tmux send-keys -t webapp:2 "webd; gow; rails c" C-m
-  tmux send-keys -t webapp:3 "webd; gow; rails s -b0.0.0.0 -p3000" C-m
-  tmux send-keys -t webapp:4 "webd; gow" C-m
-  tmux send-keys -t webapp:5 "webd; goc; ng serve --host 0.0.0.0 --port 4200" C-m
-  tmux send-keys -t webapp:6 "webd; goc;" C-m
+  tmux send-keys -t webapp:1 "web; gow; mysql -uaehven -pcypress --database webapp_develop" C-m
+  tmux send-keys -t webapp:2 "web; gow; rails c" C-m
+  tmux send-keys -t webapp:3 "web; gow; rails s -b0.0.0.0 -p3000" C-m
+  tmux send-keys -t webapp:4 "web; gow" C-m
+  tmux send-keys -t webapp:5 "web; goc; ng serve --host 0.0.0.0 --port 4200" C-m
+  tmux send-keys -t webapp:6 "web; goc;" C-m
 
   tmux select-window -t webapp:5
   tmux attach-session -t webapp
