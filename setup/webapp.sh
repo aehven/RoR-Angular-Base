@@ -187,26 +187,22 @@ function deploy {
 function tmuxinit {
   tmux start-server
   tmux new-session -d -s webapp
-  tmux new-window -t webapp:1 -n prod-rails
-  tmux new-window -t webapp:2 -n prod-ng
-  tmux new-window -t webapp:3 -n mysql
-  tmux new-window -t webapp:4 -n rails-c
-  tmux new-window -t webapp:5 -n rails-server
-  tmux new-window -t webapp:6 -n rails-bash
-  tmux new-window -t webapp:7 -n ng-serve
-  tmux new-window -t webapp:8 -n ng-bash
+  tmux new-window -t webapp:1 -n mysql
+  tmux new-window -t webapp:2 -n rails-c
+  tmux new-window -t webapp:3 -n rails-server
+  tmux new-window -t webapp:4 -n rails-bash
+  tmux new-window -t webapp:5 -n ng-serve
+  tmux new-window -t webapp:6 -n ng-bash
 
 
-  tmux send-keys -t webapp:1 "webp; gow; rails s -b0.0.0.0" C-m
-  tmux send-keys -t webapp:2 "webp; goc; ng serve --host 0.0.0.0" C-m
-  tmux send-keys -t webapp:3 "webd; gow; mysql -uaehven -pcypress --database webapp_develop" C-m
-  tmux send-keys -t webapp:4 "webd; gow; rails c" C-m
-  tmux send-keys -t webapp:5 "webd; gow; rails s -b0.0.0.0 -p3001" C-m
-  tmux send-keys -t webapp:6 "webd; gow" C-m
-  tmux send-keys -t webapp:7 "webd; goc; ng serve --host 0.0.0.0 --port 4201" C-m
-  tmux send-keys -t webapp:8 "webd; goc;" C-m
+  tmux send-keys -t webapp:1 "webd; gow; mysql -uaehven -pcypress --database webapp_develop" C-m
+  tmux send-keys -t webapp:2 "webd; gow; rails c" C-m
+  tmux send-keys -t webapp:3 "webd; gow; rails s -b0.0.0.0 -p3000" C-m
+  tmux send-keys -t webapp:4 "webd; gow" C-m
+  tmux send-keys -t webapp:5 "webd; goc; ng serve --host 0.0.0.0 --port 4200" C-m
+  tmux send-keys -t webapp:6 "webd; goc;" C-m
 
-  tmux select-window -t webapp:7
+  tmux select-window -t webapp:5
   tmux attach-session -t webapp
 }
 
