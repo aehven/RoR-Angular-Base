@@ -19,3 +19,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+#ignore public because it's a link to angular dist
+public
+/public/*
