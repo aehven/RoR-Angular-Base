@@ -157,6 +157,32 @@ function codeCheck {
   return 0
 }
 
+function deploy {
+  cd /tmp
+  rm -rf webapp
+  rm -rf client
+
+  cd /tmp
+  git clone -bmaster https://github.com/aehven/RoR-Angular-Base.git webapp
+  git clone -bmaster https://github.com/aehven/client.git client
+
+  cd /tmp/client
+  npm install
+  ng build -aot -prod
+
+  cd /tmp/webapp
+  rm -rf public
+  cp -rp /tmp/client/dist /tmp/webapp/public
+
+  cd /tmp/webapp
+  git init .
+  git add .
+  git commit -am "deploy"
+  git remote add git@heroku.com:ror-ng-starter.git
+  git push -f heroku master
+  heroku logs --tail -aror-ng-starter
+}
+
 
 function tmuxinit {
   tmux start-server
