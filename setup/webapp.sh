@@ -248,6 +248,4 @@ function stop {
   kill -9 $(ps -ef|grep "puma.*worker"|grep -v "grep"|awk '{print $2}') &> /dev/null
 }
 
-export HEROKU_BASE_NAME="ror-ng-starter"
-
 echo "SERVER_HOME = $SERVER_HOME"
