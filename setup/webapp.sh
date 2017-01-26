@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function resource {
-  source $WEBAPP_HOME/setup/webapp.sh
+  source $SERVER_HOME/setup/webapp.sh
 }
 
-function gow {
-  cd $WEBAPP_HOME
+function gos {
+  cd $SERVER_HOME
 }
 
 function goc {
@@ -47,18 +47,18 @@ function prune {
 }
 
 function genreset {
-  cd $WEBAPP_HOME
+  cd $SERVER_HOME
   rake db:drop
   rake db:create
   rake db:migrate
   rake db:seed
-  mysqldump -uaehven -pcypress webapp_develop > reset.sql
+  mysqldump -uaehven -pcypress SERVER_develop > reset.sql
 }
 
 function dbreset {
   JUST_RESET=false
 
-  if [[ ! -f $WEBAPP_HOME/reset.sql ]]
+  if [[ ! -f $SERVER_HOME/reset.sql ]]
     then
     genreset
     JUST_RESET=true
@@ -70,7 +70,7 @@ function dbreset {
       ;;
     *)
       if [[ "$JUST_RESET" != "true" ]]; then
-        mysql -uaehven -pcypress --database webapp_develop < reset.sql
+        mysql -uaehven -pcypress --database SERVER_develop < reset.sql
       fi
       ;;
   esac
@@ -81,7 +81,7 @@ function dbreset {
 export DISALLOWED_CODE='byebug|logger.*#{params}|debugger|binding.pry'
 
 function isDisallowedCodeUsed {
-  result=`find $WEBAPP_HOME -type f -name "*.*rb" -o -name "*.*js" -not -path "*\.bundle/*" -not -path "*\bower_components/*" -exec grep -Eln $DISALLOWED_CODE {} \;`
+  result=`find $SERVER_HOME -type f -name "*.*rb" -o -name "*.*js" -not -path "*\.bundle/*" -not -path "*\bower_components/*" -exec grep -Eln $DISALLOWED_CODE {} \;`
 
   if [[ ! -z "$result" ]]; then
     echo "***************************************************"
@@ -158,13 +158,46 @@ function codeCheck {
 }
 
 function deploy {
+  local OPTIND;
+  unset APP;
+  unset BRANCH;
+  unset NOMIGRATE;
+  unset NOLOG;
+  while getopts "a:t:b:o:lcm" opt; do
+    case "${opt}" in
+      a)
+          APP=${OPTARG};
+          [[ $APP == "aehven" || $APP == "test" || $APP == "production" ]] || unset APP
+      ;;
+      b)
+          BRANCH=${OPTARG}
+      ;;
+      l)
+          NOLOG=true
+      ;;
+      m)
+          NOMIGRATE=true
+      ;;
+      *)
+          deploy_usage
+      ;;
+    esac;
+  done;
+
+  shift $((OPTIND-1));
+
+  if [[ -z $APP || -z $BRANCH ]]; then
+      deploy_usage;
+      return 1;
+  fi;
+
   cd /tmp
   rm -rf webapp
   rm -rf client
 
   cd /tmp
-  git clone -bmaster https://github.com/aehven/RoR-Angular-Base.git webapp
-  git clone -bmaster https://github.com/aehven/client.git client
+  git clone -b$BRANCH https://github.com/aehven/server.git webapp
+  git clone -b$BRANCH https://github.com/aehven/client.git client
 
   cd /tmp/client
   npm install
@@ -178,8 +211,8 @@ function deploy {
   git init .
   git add .
   git commit -am "deploy"
-  git remote add heroku git@heroku.com:ror-ng-starter.git
-  git push -f heroku master
+  git remote add heroku git@heroku.com:$HEROKU_BASE_NAME-$APP.git
+  git push -f heroku $BRANCH:master
   heroku logs --tail -aror-ng-starter
 }
 
@@ -195,10 +228,10 @@ function tmuxinit {
   tmux new-window -t webapp:6 -n ng-bash
 
 
-  tmux send-keys -t webapp:1 "web; gow; mysql -uaehven -pcypress --database webapp_develop" C-m
-  tmux send-keys -t webapp:2 "web; gow; rails c" C-m
-  tmux send-keys -t webapp:3 "web; gow; rails s -b0.0.0.0 -p3000" C-m
-  tmux send-keys -t webapp:4 "web; gow" C-m
+  tmux send-keys -t webapp:1 "web; gos; mysql -uaehven -pcypress --database SERVER_develop" C-m
+  tmux send-keys -t webapp:2 "web; gos; rails c" C-m
+  tmux send-keys -t webapp:3 "web; gos; rails s -b0.0.0.0 -p3000" C-m
+  tmux send-keys -t webapp:4 "web; gos" C-m
   tmux send-keys -t webapp:5 "web; goc; ng serve --host 0.0.0.0 --port 4200" C-m
   tmux send-keys -t webapp:6 "web; goc;" C-m
 
@@ -215,4 +248,6 @@ function stop {
   kill -9 $(ps -ef|grep "puma.*worker"|grep -v "grep"|awk '{print $2}') &> /dev/null
 }
 
-echo "WEBAPP_HOME = $WEBAPP_HOME"
+export HEROKU_BASE_NAME="ror-ng-starter"
+
+echo "SERVER_HOME = $SERVER_HOME"

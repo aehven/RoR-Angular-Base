@@ -1,14 +1,14 @@
 #!/bin/bash
 
 if [[ -z $DISALLOWED_CODE ]]; then
-  source $WEBAPP_HOME/webapp.sh
+  source $SERVER_HOME/webapp.sh
   if [[ -z $DISALLOWED_CODE ]]; then
     echo "DISALLOWED_CODE is undefined."
     exit 1
   else
     #we had to source nozomi.sh in the commit, which is a waste because
     #then it has to happen for each commit.
-    echo "Please source $WEBAPP_HOME/setup/webapp.sh in your shell to avoid sourcing it automatically for each commit."
+    echo "Please source $SERVER_HOME/setup/webapp.sh in your shell to avoid sourcing it automatically for each commit."
   fi
 fi
 
