@@ -211,7 +211,7 @@ function deploy {
   git init .
   git add .
   git commit -am "deploy"
-  git remote add heroku git@heroku.com:$HEROKU_BASE_NAME-$APP.git
+  git remote add heroku git@heroku.com:$BASE_NAME-$APP.git
   git push -f heroku $BRANCH:master
   heroku logs --tail -aror-ng-starter
 }
@@ -228,7 +228,7 @@ function tmuxinit {
   tmux new-window -t webapp:6 -n ng-bash
 
 
-  tmux send-keys -t webapp:1 "web; gos; mysql -uaehven -pcypress --database SERVER_develop" C-m
+  tmux send-keys -t webapp:1 "web; gos; mysql -uaehven -pcypress --database ${BASE_NAME}_develop" C-m
   tmux send-keys -t webapp:2 "web; gos; rails c" C-m
   tmux send-keys -t webapp:3 "web; gos; rails s -b0.0.0.0 -p3000" C-m
   tmux send-keys -t webapp:4 "web; gos" C-m
