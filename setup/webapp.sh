@@ -228,8 +228,8 @@ function tmuxinit {
   tmux new-window -t webapp:6 -n ng-bash
 
 
-  tmux send-keys -t webapp:1 "web; gos; mysql -uaehven -pcypress --database ${BASE_NAME}_develop" C-m
-  tmux send-keys -t webapp:2 "web; gos; rails c" C-m
+  tmux send-keys -t webapp:1 "web; gos; mysql -uaehven -pcypress --database ${BASE_NAME}_develop"
+  tmux send-keys -t webapp:2 "web; gos; rails c"
   tmux send-keys -t webapp:3 "web; gos; rails s -b0.0.0.0 -p3000" C-m
   tmux send-keys -t webapp:4 "web; gos" C-m
   tmux send-keys -t webapp:5 "web; goc; ng serve --host 0.0.0.0 --port 4200" C-m
