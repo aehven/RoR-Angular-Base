@@ -52,7 +52,7 @@ function genreset {
   rake db:create
   rake db:migrate
   rake db:seed
-  mysqldump -uaehven -pcypress SERVER_develop > reset.sql
+  mysqldump -uaehven -pcypress ${BASE_NAME}_develop > reset.sql
 }
 
 function dbreset {
@@ -70,7 +70,7 @@ function dbreset {
       ;;
     *)
       if [[ "$JUST_RESET" != "true" ]]; then
-        mysql -uaehven -pcypress --database SERVER_develop < reset.sql
+        mysql -uaehven -pcypress --database ${BASE_NAME}_develop < reset.sql
       fi
       ;;
   esac
