@@ -157,6 +157,10 @@ function codeCheck {
   return 0
 }
 
+function deply_usage {
+  echo "deploy -a[aehven|test|production] -bbranch <-lm>"
+}
+
 function deploy {
   local OPTIND;
   unset APP;
@@ -203,17 +207,17 @@ function deploy {
   npm install
   ng build -aot -prod
 
-  cd /tmp/webapp
+  cd /tmp/server
   rm -rf public
-  cp -rp /tmp/client/dist /tmp/webapp/public
+  cp -rp /tmp/client/dist /tmp/server/public
 
-  cd /tmp/webapp
+  cd /tmp/server
   git init .
   git add .
   git commit -am "deploy"
   git remote add heroku git@heroku.com:$BASE_NAME-$APP.git
   git push -f heroku $BRANCH:master
-  heroku logs --tail -aror-ng-starter
+  heroku logs --tail -a$BASE_NAME-$APP
 }
 
 
