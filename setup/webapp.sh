@@ -157,7 +157,7 @@ function codeCheck {
   return 0
 }
 
-function deply_usage {
+function deploy_usage {
   echo "deploy -a[aehven|test|production] -bbranch <-lm>"
 }
 
