@@ -205,7 +205,7 @@ function deploy {
 
   cd /tmp/client
   npm install
-  ng build -aot -prod
+  ng build --aot=true -e=prod
   cp -rp dist/* /tmp/server/public/.
 
   cd /tmp/server
