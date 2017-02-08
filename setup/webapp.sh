@@ -215,7 +215,7 @@ function deploy {
   git init .
   git add .
   git commit -am "deploy"
-  git remote add heroku git@heroku.com:$BASE_NAME-$APP.git
+  heroku git:remote -a $BASE_NAME-$APP
   git push -f heroku $BRANCH:master
   heroku logs --tail -a$BASE_NAME-$APP
 }
