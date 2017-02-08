@@ -196,7 +196,7 @@ function deploy {
   fi;
 
   cd /tmp
-  rm -rf webapp
+  rm -rf server
   rm -rf client
 
   cd /tmp
