@@ -206,10 +206,7 @@ function deploy {
   cd /tmp/client
   npm install
   ng build -aot -prod
-
-  cd /tmp/server
-  rm -rf public
-  cp -rp /tmp/client/dist /tmp/server/public
+  cp -rp dist/* /tmp/server/public/.
 
   cd /tmp/server
   git init .
