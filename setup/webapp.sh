@@ -200,7 +200,7 @@ function deploy {
   rm -rf client
 
   cd /tmp
-  git clone -b$BRANCH https://github.com/aehven/server.git webapp
+  git clone -b$BRANCH https://github.com/aehven/server.git server
   git clone -b$BRANCH https://github.com/aehven/client.git client
 
   cd /tmp/client
